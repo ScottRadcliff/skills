@@ -1,0 +1,5 @@
+interface:
+  display_name: "Bug Diagnoser"
+  short_description: "Diagnose bugs before implementation"
+  default_prompt: "Use $bug-diagnoser to diagnose this bug before making changes."
+
