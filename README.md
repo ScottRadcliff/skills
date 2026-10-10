@@ -2,7 +2,13 @@
 
 A personal collection of agent skills written to support the software development lifecycle and shared publicly for others to use. Personal and business-specific information has been extracted so the skills can be reused independently.
 
-## What’s Included
+## Available Skills
+
+### [`dev-server-setup`](dev-server-setup/README.md)
+
+Creates or adapts a local Docker development environment for an existing application, or scaffolds an application in an empty directory after confirming the framework. It inspects the project, generates Docker and Compose configuration plus a Makefile, and verifies the server, console, database, and tests when the required tools are available.
+
+Use it for local development setup. Production deployment is outside its scope. See the [skill README](dev-server-setup/README.md) for prerequisites, example prompts, and the generated commands.
 
 ### `bug-diagnoser`
 
@@ -17,6 +23,43 @@ The skill is triggered by prompts that begin with `bug:` or by an explicit reque
 - Edge cases
 - Relevant specs and checks
 
+## Installation
+
+These are agent instructions, with no package dependencies or standalone server to run in this repository. You need Git and an agent that supports `SKILL.md` skills. Docker and Make are needed when using `dev-server-setup` to build and run an application's environment.
+
+Clone the collection:
+
+```bash
+git clone https://github.com/ScottRadcliff/skills.git
+cd skills
+```
+
+For Codex, install either or both skills for use across your projects. Run these commands from the cloned repository:
+
+```bash
+mkdir -p "$HOME/.agents/skills"
+cp -R dev-server-setup "$HOME/.agents/skills/"
+cp -R bug-diagnoser "$HOME/.agents/skills/"
+```
+
+For installation in a single project, copy the desired skill directory into that project's `.agents/skills/` directory instead. Copy the whole directory so its metadata stays with `SKILL.md`. Check for an existing installation before copying; copying to an existing directory can overwrite local edits. Copies do not update automatically when this repository changes.
+
+Codex detects installed skills automatically; restart it if a skill does not appear. These locations and discovery behavior follow the [official OpenAI skill documentation](https://learn.chatgpt.com/docs/build-skills). For other agents, use their documented skill directory and invocation syntax.
+
+## Usage
+
+Open the application you want to work on in your agent, then invoke a skill in your prompt:
+
+```text
+Use $dev-server-setup to configure this application for local Docker development with a Makefile.
+```
+
+```text
+Use $bug-diagnoser to investigate why submitting the signup form returns a 500 error. Diagnose it before making changes.
+```
+
+Run development commands in the target application's directory after setup, not in this skills repository. The setup skill reports any configuration or first-run steps needed for that application.
+
 ## Repository Structure
 
 ```text
@@ -24,6 +67,10 @@ The skill is triggered by prompts that begin with `bug:` or by an explicit reque
 ├── bug-diagnoser/
 │   ├── SKILL.md              # Skill instructions and workflow
 │   ├── README.md             # Skill-specific notes
+│   └── agents/openai.yaml    # Display metadata and default prompt
+├── dev-server-setup/
+│   ├── SKILL.md              # Development environment workflow
+│   ├── README.md             # Setup and usage guide
 │   └── agents/openai.yaml    # Display metadata and default prompt
 └── README.md                 # This overview
 ```

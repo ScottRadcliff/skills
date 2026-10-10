@@ -1,0 +1,4 @@
+interface:
+  display_name: "Server and Makefile Setup"
+  short_description: "Set up Docker development servers and Makefiles"
+  default_prompt: "Use $dev-server-setup to configure this application for local Docker development with a Makefile."
