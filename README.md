@@ -4,24 +4,29 @@ A personal collection of agent skills written to support the software developmen
 
 ## Available Skills
 
-### [`dev-server-setup`](dev-server-setup/README.md)
+### [`dev-server-setup`](dev-server-setup/SKILL.md)
 
 Creates or adapts a local Docker development environment for an existing application, or scaffolds an application in an empty directory after confirming the framework. It inspects the project, generates Docker and Compose configuration plus a Makefile, and verifies the server, console, database, and tests when the required tools are available.
 
-Use it for local development setup. Production deployment is outside its scope. See the [skill README](dev-server-setup/README.md) for prerequisites, example prompts, and the generated commands.
+**Use when:** Setting up containerized local development or scaffolding an application in an empty directory. Production deployment is outside its scope.
 
-### `bug-diagnoser`
+**Example prompt:**
+
+```text
+Use $dev-server-setup to configure this application for local Docker development with a Makefile.
+```
+
+### [`bug-diagnoser`](bug-diagnoser/SKILL.md)
 
 Diagnoses software bugs before implementation. It searches the codebase for evidence, ranks likely causes, considers edge cases, recommends the smallest codebase-consistent change, and runs relevant checks without modifying application code.
 
-The skill is triggered by prompts that begin with `bug:` or by an explicit request to investigate a defect. It produces a structured response covering:
+**Use when:** Investigating a defect before implementation. Invoke it explicitly or begin your prompt with `bug:`. Application code changes require a separate instruction to implement the fix.
 
-- Most likely cause
-- Evidence
-- Other plausible causes
-- Suggested change
-- Edge cases
-- Relevant specs and checks
+**Example prompt:**
+
+```text
+Use $bug-diagnoser to investigate why submitting the signup form returns a 500 error. Diagnose it before making changes.
+```
 
 ## Installation
 
@@ -48,15 +53,7 @@ Codex detects installed skills automatically; restart it if a skill does not app
 
 ## Usage
 
-Open the application you want to work on in your agent, then invoke a skill in your prompt:
-
-```text
-Use $dev-server-setup to configure this application for local Docker development with a Makefile.
-```
-
-```text
-Use $bug-diagnoser to investigate why submitting the signup form returns a 500 error. Diagnose it before making changes.
-```
+Open the application you want to work on in your agent, then invoke a skill using its example prompt above. Each skill's linked `SKILL.md` contains its full workflow. The [development server setup guide](dev-server-setup/README.md) explains prerequisites, first-run steps, and generated Make commands.
 
 Run development commands in the target application's directory after setup, not in this skills repository. The setup skill reports any configuration or first-run steps needed for that application.
 
